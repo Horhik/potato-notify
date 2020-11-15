@@ -1,3 +1,4 @@
+![potato icon](./icons/work.png)
 # potato-notify
 A pomodoro timer with notifications.
 
