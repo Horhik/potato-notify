@@ -5,8 +5,8 @@ PAUSE=5
 INTERACTIVE=true
 MUTE=false
 
-DIR=$(dirname "$0")
-
+DIR=/usr/lib/potato-notify
+echo $DIR
 show_help() {
 	cat <<-END
 		usage: potato [-s] [-m] [-w m] [-b m] [-h]
@@ -22,7 +22,7 @@ show_help() {
 }
 
 play_notification() {
-	aplay -q /usr/lib/potato/notification.wav&
+	aplay -q $DIR/notification.wav&
 }
 
 while getopts :sw:b:m opt; do
