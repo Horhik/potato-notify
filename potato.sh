@@ -5,6 +5,8 @@ PAUSE=5
 INTERACTIVE=true
 MUTE=false
 
+DIR=$(dirname "$0")
+
 show_help() {
 	cat <<-END
 		usage: potato [-s] [-m] [-w m] [-b m] [-h]
@@ -56,7 +58,8 @@ while true
 do
 	for ((i=$WORK; i>0; i--))
 	do
-		printf "$time_left" $i "work"
+		m='m'
+		notify-send -u normal -i $DIR/icons/work.png "$i$m left of work"
 		sleep 1m
 	done
 
@@ -64,13 +67,14 @@ do
 	if $INTERACTIVE; then
 		read -d '' -t 0.001
 		echo -e "\a"
-		echo "Work over"
+		notify-send -u normal -i $DIR/icons/work-completed.png "Work over"
 		read
 	fi
 
 	for ((i=$PAUSE; i>0; i--))
 	do
-		printf "$time_left" $i "pause"
+		m='m'
+		notify-send -u normal -i $DIR/icons/pause.png "$i$m left of pause"
 		sleep 1m
 	done
 
@@ -78,7 +82,7 @@ do
 	if $INTERACTIVE; then
 		read -d '' -t 0.001
 		echo -e "\a"
-		echo "Pause over"
+		notify-send -u critical -i  $DIR/icons/pause-completed.png "Pause over"
 		read
 	fi
 done
